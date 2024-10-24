@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit - Task Manager{% endblock %}
+
+{% block login_or_dashboard %}<a class="nav-link" href="{% url 'task:dashboard' %}">Dashboard</a>{% endblock %}
+
+{% block logout_or_register %}<a class="nav-link" href="{% url 'task:logout' %}">Logout</a>{% endblock %}
+
+
+{% block content %}
+<h2 class="mb-4">Edit Task</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update Task</button>
+</form>
+{% endblock %}
+
+

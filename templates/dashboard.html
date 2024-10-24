@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Task Manager{% endblock %}
+
+{% block login_or_dashboard %}<a class="nav-link" href="{% url 'task:create' %}">Create Task</a>{% endblock %}
+
+{% block logout_or_register %}<a class="nav-link" href="{% url 'task:logout' %}">Logout</a>{% endblock %}
+
+
+{% block content %}
+<h2 class="mb-4">All Tasks</h2>
+<div class="task-list">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.due_date|date:"d.m.Y H:i" }}</td>
+                <td><span class="badge
+                    {% if task.status == 'cp' %}bg-success{% elif task.status == 'ip' %}bg-warning{% else %}bg-danger{% endif %}">
+                    {{ task.get_status_display }}
+                    </span></td>
+                <td>
+                    <a href="{% url 'task:update' pk=task.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a class="btn btn-sm btn-danger" href="{% url 'task:delete' pk=task.pk %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}            <!-- Add more rows for additional tasks -->
+        </tbody>
+    </table>
+</div>
+{% endblock %}

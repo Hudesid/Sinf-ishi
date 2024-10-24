@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Task Manager{% endblock %}
+
+{% block login_or_dashboard %}<a class="nav-link" href="{% url 'user:login' %}">Login</a>{% endblock %}
+
+
+{% block logout_or_register %}<a class="nav-link active" href="{% url 'user:register' %}">Register</a>{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Register</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}

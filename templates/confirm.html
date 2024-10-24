@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Task Manager{% endblock %}
+
+{% block login_or_dashboard %}<a class="nav-link" href="{% url 'task:create' %}">Create Task</a>{% endblock %}
+
+{% block logout_or_register %}<a class="nav-link" href="{% url 'task:logout' %}">Logout</a>{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h1>Are you sure to delete this "{{ task.title }}"?</h1>
+        <div class="btn-container">
+            <form method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-yes" style="margin-left: 160px;">Yes,I'm sure</button>
+                <a href="{% url 'task:dashboard' %}" class="btn btn-primary btn-no" style="margin-left: 20px;">No,take me back</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
